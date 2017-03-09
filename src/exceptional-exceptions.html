@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Exceptional Exceptions(). | {{ super() }}{% endblock %}
+
+{% block header %}Exceptional Exceptions().{% endblock %}
+{% block subheader %}<sup>python</sup>{% endblock %}
+
+{% block content %}
+<pre><code class="python">ERROR:root:Caught an error
+Traceback (most recent call last):
+  File "example-logging-exception.py", line 8, in <module>
+    x = get_number()
+    File "example-logging-exception.py", line 5, in get_number
+    return int('foo')
+    ValueError: invalid literal for int() with base 10: 'foo'
+</code></pre>
+<p>
+    Python developers are used to see Exceptions flying around, it's a great way to prevent application from damaging data and making serious mistakes.
+</p>
+<p>When developing new applications or libraries we should think carefully about what kind of exception it could raise and especially which exceptions could end up in user hads.<br />
+    <a href="https://docs.djangoproject.com/en/1.10/ref/forms/validation/">Django Forms</a> is great example of exceptions use: Forms validation is built around `<a href="https://docs.djangoproject.com/en/1.10/ref/exceptions/#validationerror">ValidationError</a>` class, however it's barely impossible for end application to get `<a href="https://docs.djangoproject.com/en/1.10/ref/exceptions/#validationerror">ValidationError</a>` in own context.
+</p>
+<pre><code class="python">def test_highlight(test):
+    try:
+        run_test(test)
+    except IncorrectException, e:
+        print('Boo');
+
+def run_test(test):
+    raise RunException('test failed')
+</code></pre>
+<hr />
+<div class="row"><div class="10u">Nick Garanko</div><div class="2u">09/03/2017</div></div>
+{% endblock %}

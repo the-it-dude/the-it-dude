@@ -6,7 +6,7 @@
    -->
 <html>
     <head>
-        <title>IT Dude's blog.</title>
+        <title>{% block page_title %}IT Dude's blog.{% endblock %}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -43,11 +43,11 @@
                 <h2>Menu</h2>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    
-                    
-                    <li><a href="/exceptional-exceptions.html">Exceptional Exceptions().</a></li>
-                    
-                    
+                    {% if MENU_ELEMENTS %}
+                    {% for item in MENU_ELEMENTS %}
+                    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                    {% endif %}
                     <li><a href="http://itdude.eu">Go to IT Dude.eu</a></li>
                 </ul>
             </nav>
@@ -57,26 +57,11 @@
                 <div class="inner">
                     <header>
                         <h1>
-                            Welcome to IT Dude' blog.</h1>
-                        <p>Home of boring nerdy articles about how we make mistakes.</p>
+                            {% block header %}Welcome to IT Dude' blog.{% endblock %}</h1>
+                        <p>{% block subheader %}Home of boring nerdy articles about how we make mistakes.{% endblock %}</p>
                     </header>
-                    
-<section class="tiles">
-    
-    <article class="style1">
-        <span class="image">
-            <img src="images/pic01.jpg" alt="Exceptional Exceptions." />
-        </span>
-        <a href="/exceptional-exceptions.html">
-            <h2>Exceptional Exceptions.</h2>
-            <div class="content">
-                <p>Let&#39;s burn things down.</p>
-            </div>
-        </a>
-    </article>
-    
-</section>
-
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
 

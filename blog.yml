@@ -1,0 +1,18 @@
+---
+context:
+  MENU_ELEMENTS:
+    - title: Exceptional Exceptions().
+      url: /exceptional-exceptions.html
+files:
+  - source: index.html
+    destination: index.html
+    context:
+      articles:
+        - title: Exceptional Exceptions.
+          description: Let's burn things down.
+          image: images/pic01.jpg
+          url: /exceptional-exceptions.html
+          style: style1
+
+  - source: exceptional-exceptions.html
+    destination: exceptional-exceptions.html
