@@ -15,20 +15,29 @@ Traceback (most recent call last):
     ValueError: invalid literal for int() with base 10: 'foo'
 </code></pre>
 <p>
-    Python developers are used to see Exceptions flying around, it's a great way to prevent application from damaging data and making serious mistakes.
+    Python developers are used to see Exceptions flying around. <br />
+    Exceptions are awesome, each exception is accompaniated by stack trace and thanks to additional tools such as <a href="https://sentry.io/">Sentry</a> we can include complete context in log and see what exactly happened.<br />
+    However exceptions are often misunderstood as <a href="https://docs.python.org/2/tutorial/controlflow.html">control flow statements</a> and must admit, it's way too easy to get such an idea and write code like:
 </p>
-<p>When developing new applications or libraries we should think carefully about what kind of exception it could raise and especially which exceptions could end up in user hads.<br />
+<pre><code class="python">POSSIBLE_RAINBOW_COLORS = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+
+def magic_rainbow_drawer(x, y):
+    for stripe in POSSIBLE_RAINBOW_COLORS:
+        draw_stripe(stripe, x, y)
+
+def draw_stripe(stripe, x, y):
+    if x == y:
+        raise IncorrectLocationError('Rainbow can not start and end at same place')
+    if stripe not in POSSILBE_RAINBOW_COLORS:
+        raise IncorrectColorError('Not a rainbow color!')
+</code></pre>
+<p>
+    This is oversimplified example illustrates rationale behind using exceptions to control flow.
+<p>
+    When developing new applications or libraries we should think carefully about what kind of exception it could raise and especially which exceptions could end up in user hands.<br /><br />
+    
     <a href="https://docs.djangoproject.com/en/1.10/ref/forms/validation/">Django Forms</a> is great example of exceptions use: Forms validation is built around `<a href="https://docs.djangoproject.com/en/1.10/ref/exceptions/#validationerror">ValidationError</a>` class, however it's barely impossible for end application to get `<a href="https://docs.djangoproject.com/en/1.10/ref/exceptions/#validationerror">ValidationError</a>` in own context.
 </p>
-<pre><code class="python">def test_highlight(test):
-    try:
-        run_test(test)
-    except IncorrectException, e:
-        print('Boo');
-
-def run_test(test):
-    raise RunException('test failed')
-</code></pre>
 <hr />
 <div class="row"><div class="10u">Nick Garanko</div><div class="2u">09/03/2017</div></div>
 {% endblock %}
